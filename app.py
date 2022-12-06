@@ -11,20 +11,14 @@ from flask import Flask, request, render_template, redirect
 from werkzeug.utils import secure_filename
 import os 
 from tensorflow.keras.utils import load_img, img_to_array
-#from tensorflow.python.keras.models import load_model
 from tensorflow.keras.applications.resnet50 import ResNet50
 from tensorflow.keras.applications.resnet50 import decode_predictions
 from tensorflow.keras.applications.resnet50 import preprocess_input
 import numpy as np
 
-#import keras.backend.tensorflow_backend as tb
-#tb._SYMBOLIC_SCOPE.value = True
-
 app = Flask(__name__)
 
-#classifier = load_model('D:/FLASK/CNN_CAT_DOG/my_cnn_model5.h5')
 classifier = ResNet50(weights='imagenet')
-#app.config['UPLOAD_FOLDER'] = 'D:/FLASK/CNN_JANA/static/'
 app.config['UPLOAD_FOLDER'] = './static/'
 
 @app.route('/')
@@ -48,7 +42,6 @@ def predict():
 	ff = secure_filename(janafile)
 	full_filename = os.path.join(app.config['UPLOAD_FOLDER'],ff)
 	
-	
 	myimage    = load_img(full_filename, target_size=(224, 224))
 	test_image = img_to_array(myimage)
 	
@@ -68,5 +61,5 @@ def gohome():
 	return redirect('https://scholarlabfoundation.tech/')
 
 if __name__ == "__main__":
-	app.run(debug=False,threaded=False)
-    #app.run(debug=True)
+	#app.run(debug=False,threaded=False)
+    app.run(debug=True)
