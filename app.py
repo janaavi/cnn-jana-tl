@@ -11,14 +11,14 @@ from flask import Flask, request, render_template, redirect
 from werkzeug.utils import secure_filename
 import os 
 from tensorflow.keras.utils import load_img, img_to_array
-from tensorflow.keras.applications.resnet50 import ResNet50
-from tensorflow.keras.applications.resnet50 import decode_predictions
-from tensorflow.keras.applications.resnet50 import preprocess_input
+from tensorflow.keras.applications.vgg16 import VGG16
+from tensorflow.keras.applications.vgg16 import decode_predictions
+from tensorflow.keras.applications.vgg16 import preprocess_input
 import numpy as np
 
 app = Flask(__name__)
 
-classifier = ResNet50(weights='imagenet')
+classifier = VGG16(weights='imagenet')
 app.config['UPLOAD_FOLDER'] = './static/'
 
 @app.route('/')
@@ -61,5 +61,5 @@ def gohome():
 	return redirect('https://scholarlabfoundation.tech/')
 
 if __name__ == "__main__":
-	#app.run(debug=False,threaded=False)
-    app.run(debug=True)
+	app.run(debug=False,threaded=False)
+    #app.run(debug=True)
