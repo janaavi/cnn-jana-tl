@@ -11,14 +11,14 @@ from flask import Flask, request, render_template, redirect
 from werkzeug.utils import secure_filename
 import os 
 from tensorflow.keras.utils import load_img, img_to_array
-from tensorflow.keras.applications.vgg16 import VGG16
-from tensorflow.keras.applications.vgg16 import decode_predictions
-from tensorflow.keras.applications.vgg16 import preprocess_input
+from tensorflow.keras.applications.mobilenet import MobileNet
+from tensorflow.keras.applications.mobilenet import decode_predictions
+from tensorflow.keras.applications.mobilenet import preprocess_input
 import numpy as np
 
 app = Flask(__name__)
 
-classifier = VGG16(weights='imagenet')
+classifier = MobileNet(weights='imagenet')
 app.config['UPLOAD_FOLDER'] = './static/'
 
 @app.route('/')
